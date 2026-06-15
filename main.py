@@ -18,6 +18,10 @@ root = tk.Tk()
 root.title("Sonarian Decoder")
 root.geometry("950x400")
 
+# --- ДОБАВЬТЕ ЭТУ СТРОЧКУ СЮДА ---
+root.iconbitmap("icon.ico")
+# ---------------------------------
+
 entry = tk.Entry(root, font=("Arial", 16), width=50)
 entry.pack(pady=20)
 
