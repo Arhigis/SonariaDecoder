@@ -5,22 +5,36 @@ import ctypes
 import tkinter as tk
 from tkinter import messagebox
 import pyglet
+import sys
+
+def get_resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 FONT_FILE = "Sonarian.otf"
 FONT_NAME = "Sonarian"
 
-if os.path.exists(FONT_FILE):
-    pyglet.font.add_file(FONT_FILE)
-else:
+try:
+    font_path = get_resource_path(FONT_FILE)
+    if os.path.exists(font_path):
+        pyglet.font.add_file(font_path)
+    else:
+        FONT_NAME = "Arial"
+except Exception:
     FONT_NAME = "Arial"
 
 root = tk.Tk()
 root.title("Sonarian Decoder")
 root.geometry("950x400")
 
-# --- ДОБАВЬТЕ ЭТУ СТРОЧКУ СЮДА ---
-root.iconbitmap("icon.ico")
-# ---------------------------------
+try:
+    icon_path = get_resource_path("icon.ico")
+    root.iconbitmap(icon_path)
+except Exception:
+    pass
 
 entry = tk.Entry(root, font=("Arial", 16), width=50)
 entry.pack(pady=20)
